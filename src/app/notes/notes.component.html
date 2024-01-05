@@ -1,0 +1,53 @@
+<div class="layout-column align-items-center justify-content-start">
+  <section class="layout-row align-items-center justify-content-center mt-30">
+    <input
+      data-test-id="input-note-title"
+      type="text"
+      class="large mx-8"
+      placeholder="Note Title"
+      #title
+    />
+    <input
+      data-test-id="input-note-status"
+      type="text"
+      class="large mx-8"
+      placeholder="Note Status"
+      #status
+    />
+    <button class="" data-test-id="submit-button" (click)="addNote()">
+      Add Note
+    </button>
+  </section>
+
+  <div class="mt-50">
+    <ul class="tabs">
+      <li
+        class="tab-item slide-up-fade-in"
+        [attr.data-test-id]="status.toLowerCase() + 'Button'"
+        [ngClass]="{
+          active: selectedTab.toLowerCase() === status.toLowerCase()
+        }"
+        *ngFor="let status of statusList"
+        (click)="onTabClicked(status)"
+      >
+        {{ status }}
+      </li>
+    </ul>
+  </div>
+  <div class="card w-40 pt-30 pb-8">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody data-test-id="notesList">
+        <tr *ngFor="let note of filteredNotes">
+          <td>{{ note.title }}</td>
+          <td>{{ note.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
